@@ -1,21 +1,21 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/memory/todo_data_holder.dart';
-import 'package:flutter/material.dart';
 
-class TodoList extends StatelessWidget {
-  const TodoList({super.key});
+import 'package:fast_app_base/data/memory/todo_data_holder.dart';
+import 'package:fast_app_base/screen/main/tab/todo/w_todo_item.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+
+class TodoList extends StatelessWidget with TodoDataProvider{
+  TodoList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: TodoDataHolder.of(context).notifier, 
-      builder: (context, todoList, child) {
-        return todoList.isEmpty 
-        ? Text('할 일을 작성해보세요')
+    return Obx(() {
+      return todoData.todoList.isEmpty 
+        ? const Text('할 일을 작성해보세요')
         : Column(
-          children: todoList.map((e) => Text(e.title)).toList()
+          children: todoData.todoList.map((e) => TodoItem(e)).toList()
         );
-      }
-    );
+    });
   }
 }

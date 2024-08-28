@@ -1,9 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/data/memory/todo_data_holder.dart';
-import 'package:fast_app_base/data/memory/vo_todo.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
-import 'package:fast_app_base/screen/main/write/d_write.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/common.dart';
@@ -16,7 +14,7 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin, TodoDataProvider {
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.favorite];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -54,10 +52,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
         bottomNavigationBar: _buildBottomNavigationBar(context),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            final result = await WriteTodoDialog().show();
-            if (result != null) {
-              TodoDataHolder.of(context).notifier.addTodos(Todo(id: DateTime.now().millisecondsSinceEpoch, title: result.text, dueDate: result.dateTime));
-            }
+             todoData.addTodo();
           },
           child: const Icon(EvaIcons.plus),
         ),

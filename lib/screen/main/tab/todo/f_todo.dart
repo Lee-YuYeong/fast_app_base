@@ -26,10 +26,10 @@ class _TodoFragmentState extends State<TodoFragment> {
               )
             ],
           ),
-          const Expanded(
+          Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: const TodoList(),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: TodoList(),
             ),
           )
         ],

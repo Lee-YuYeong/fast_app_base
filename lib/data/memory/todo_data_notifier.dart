@@ -4,8 +4,5 @@ import 'package:flutter/material.dart';
 class TodoDataNotifier extends ValueNotifier<List<Todo>> {
   TodoDataNotifier() : super([]);
 
-  void addTodos(Todo todo) {
-    value.add(todo);
-    notifyListeners();
-  }
+
 }
